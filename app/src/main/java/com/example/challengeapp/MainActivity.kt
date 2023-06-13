@@ -46,20 +46,38 @@ class MainActivity : AppCompatActivity() {
             }
             false -> editTextPassword?.error = null
         }
-
-        val user = User(
-            0,
-            username,
-            password
-        )
-        val onSuccessListener = object : UserRepository.OnSuccessListener {
-            override fun onSuccess() {
-                Toast.makeText(
-                    this@MainActivity, "Success.",
-                    Toast.LENGTH_SHORT
-                ).show()
+        val usernames: ArrayList<String> = ArrayList()
+        val onGetListener = object : UserRepository.OnGetListener {
+            override fun onSuccess(items: List<User>) {
+                items.forEach{user->
+                    usernames.add(user.username)
+                }
+                when (usernames.size!=0)
+                {
+                    true -> {
+                        editTextUsername?.error = getString(R.string.error_already_exists)
+                        return
+                    }
+                    false ->{editTextUsername?.error = null
+                        val user = User(
+                            0,
+                            username,
+                            password
+                        )
+                        val onSuccessListener = object : UserRepository.OnSuccessListener {
+                            override fun onSuccess() {
+                                Toast.makeText(
+                                    this@MainActivity, "Success.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                        userRepository.insertUser(user,onSuccessListener)
+                    }
+                }
             }
         }
-        userRepository.insertUser(user,onSuccessListener)
+        userRepository.getUsersById(username,onGetListener)
+
     }
 }
