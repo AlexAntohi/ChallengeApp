@@ -4,6 +4,7 @@ import com.example.challengeapp.ApplicationController
 import com.example.challengeapp.data.models.User
 import com.example.challengeapp.data.tasks.DeleteUsersTask
 import com.example.challengeapp.data.tasks.GetAllUsersTask
+import com.example.challengeapp.data.tasks.GetByUsernameAndPasswordTask
 import com.example.challengeapp.data.tasks.GetByUsernameTask
 import com.example.challengeapp.data.tasks.InsertUsersTask
 
@@ -40,6 +41,10 @@ class UserRepository () {
     fun getUsersById(username:String,listener: OnGetListener)
     {
         GetByUsernameTask(userDatabase,listener).execute(username)
+    }
+    fun getUsersByUsernameAndPassword(username: String,password: String,listener: OnGetListener)
+    {
+        GetByUsernameAndPasswordTask(userDatabase,listener).execute(Pair(username,password))
     }
 
 }

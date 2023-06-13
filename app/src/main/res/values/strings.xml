@@ -6,4 +6,6 @@
     <string name="signInButton">Sign In</string>
     <string name="error_required">Required field!</string>
     <string name="error_already_exists">The username already exists</string>
+    <string name="error_does_not_exist">The username does not exist</string>
+    <string name="error_wrong_password">The password is not correct</string>
 </resources>
