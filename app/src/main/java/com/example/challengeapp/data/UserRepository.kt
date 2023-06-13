@@ -4,6 +4,7 @@ import com.example.challengeapp.ApplicationController
 import com.example.challengeapp.data.models.User
 import com.example.challengeapp.data.tasks.DeleteUsersTask
 import com.example.challengeapp.data.tasks.GetAllUsersTask
+import com.example.challengeapp.data.tasks.GetByUsernameTask
 import com.example.challengeapp.data.tasks.InsertUsersTask
 
 class UserRepository () {
@@ -15,7 +16,6 @@ class UserRepository () {
     interface OnGetListener {
         fun onSuccess(items: List<User>)
     }
-
     private var userDatabase: UserDatabase ?= null
 
     init {
@@ -36,7 +36,10 @@ class UserRepository () {
     fun getAllUsers(listener: OnGetListener){
 
         GetAllUsersTask(userDatabase, listener).execute()
-
+    }
+    fun getUsersById(username:String,listener: OnGetListener)
+    {
+        GetByUsernameTask(userDatabase,listener).execute(username)
     }
 
 }
