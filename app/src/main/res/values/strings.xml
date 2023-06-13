@@ -4,4 +4,6 @@
     <string name="passwordHint">Enter your password</string>
     <string name="loginButton">Login</string>
     <string name="signInButton">Sign In</string>
+    <string name="error_required">Required field!</string>
+    <string name="error_already_exists">The username already exists</string>
 </resources>
