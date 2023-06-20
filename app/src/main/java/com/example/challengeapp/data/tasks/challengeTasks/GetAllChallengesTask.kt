@@ -9,7 +9,7 @@ class GetAllChallengesTask (private val userDatabase: UserDatabase?, private val
     AsyncTask<Void, Void, List<Challenge>>() {
 
     override fun doInBackground(vararg challenges: Void?): List<Challenge>? {
-        return userDatabase?.ChallengeDao()?.getAllChallenges()
+        return userDatabase?.challengeDao()?.getAllChallenges()
     }
 
     override fun onPostExecute(result: List<Challenge>) {

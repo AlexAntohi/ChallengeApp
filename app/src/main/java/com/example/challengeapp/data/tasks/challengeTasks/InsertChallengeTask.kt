@@ -11,7 +11,7 @@ class InsertChallengeTask( private val userDatabase: UserDatabase?, private val 
     AsyncTask<Challenge, Void, Void>() {
 
     override fun doInBackground(vararg challenges: Challenge?): Void? {
-        userDatabase?.ChallengeDao()?.insert(challenges[0])
+        userDatabase?.challengeDao()?.insert(challenges[0])
         return null
     }
 
