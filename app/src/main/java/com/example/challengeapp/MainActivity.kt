@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.challengeapp.data.ChallengeRepository
 import com.example.challengeapp.data.UserRepository
 import com.example.challengeapp.data.models.Challenge
 import com.example.challengeapp.data.models.User
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private var editTextUsername: EditText? = null
     private var editTextPassword: EditText? = null
     private val userRepository = UserRepository()
+    private val challengeRepository = ChallengeRepository()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -158,6 +160,21 @@ class MainActivity : AppCompatActivity() {
             "Apa cu ulei",
         "Cel provocat va trebui sa bea un pahar de apa cu ulei ( se intelege ironia )."
                 )
+        val challenge2 = Challenge (
+            0,
+            "Apa cu ulei la patrat",
+            "Cel provocat va trebui sa bea un pahar de apa cu ulei ( se intelege ironia 2 )."
+        )
+        val onSuccessListener = object : ChallengeRepository.OnSuccessListener {
+            override fun onSuccess() {
+                Toast.makeText(
+                    this@MainActivity, "Success.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        challengeRepository.insertChallenge(challenge,onSuccessListener)
+        challengeRepository.insertChallenge(challenge2,onSuccessListener)
 
     }
 }
