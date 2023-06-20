@@ -1,6 +1,7 @@
 package com.example.challengeapp
 
 import android.app.Application
+import android.content.Context
 import android.service.autofill.UserData
 import androidx.room.Room
 import com.example.challengeapp.data.UserDatabase
@@ -29,7 +30,10 @@ class ApplicationController : Application() {
             applicationContext,
             UserDatabase::class.java,
             databaseName
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
+
 
 }
