@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.challengeapp.data.UserRepository
+import com.example.challengeapp.data.models.Challenge
 import com.example.challengeapp.data.models.User
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         loginButton?.setOnClickListener {
             login()
         }
+        //initializeChallenges()
     }
     private fun login()
     {
@@ -147,5 +149,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         userRepository.getUsersById(username,onGetListener)
+    }
+
+    private fun initializeChallenges(){
+
+        val challenge = Challenge (
+            0,
+            "Apa cu ulei",
+        "Cel provocat va trebui sa bea un pahar de apa cu ulei ( se intelege ironia )."
+                )
+
     }
 }
