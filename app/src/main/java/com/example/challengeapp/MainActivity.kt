@@ -1,5 +1,6 @@
 package com.example.challengeapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun login()
     {
-        val username = editTextUsername?.text?.toString() ?: return
+        val username = editTextUsername?.text?.toString()?.trim() ?: return
         when (username.isEmpty()) {
             true -> {
                 editTextUsername?.error = getString(R.string.error_required)
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
             false -> editTextUsername?.error = null
         }
-        val password = editTextPassword?.text?.toString() ?: return
+        val password = editTextPassword?.text?.toString()?.trim() ?: return
         when (password.isEmpty()) {
             true -> {
                 editTextPassword?.error = getString(R.string.error_required)
@@ -71,6 +72,10 @@ class MainActivity : AppCompatActivity() {
                                 return
                             }
                             false ->{
+                                val intent = Intent(this@MainActivity, AppActivity::class.java)
+                                intent.putExtra("username", username)
+                                startActivity(intent)
+                                finish()
                                 Toast.makeText(
                                     this@MainActivity, "Success Login.",
                                     Toast.LENGTH_SHORT
@@ -94,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         userRepository.getUsersById(username,onGetListener)
     }
     private fun signIn() {
-        val username = editTextUsername?.text?.toString() ?: return
+        val username = editTextUsername?.text?.toString()?.trim() ?: return
         when (username.isEmpty()) {
             true -> {
                 editTextUsername?.error = getString(R.string.error_required)
@@ -102,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             }
             false -> editTextUsername?.error = null
         }
-        val password = editTextPassword?.text?.toString() ?: return
+        val password = editTextPassword?.text?.toString()?.trim() ?: return
         when (password.isEmpty()) {
             true -> {
                 editTextPassword?.error = getString(R.string.error_required)
