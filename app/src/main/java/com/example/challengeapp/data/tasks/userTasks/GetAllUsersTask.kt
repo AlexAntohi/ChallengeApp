@@ -1,4 +1,4 @@
-package com.example.challengeapp.data.tasks
+package com.example.challengeapp.data.tasks.userTasks
 
 import android.os.AsyncTask
 import com.example.challengeapp.data.UserDatabase
