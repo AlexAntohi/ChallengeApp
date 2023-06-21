@@ -8,4 +8,12 @@
     <string name="error_already_exists">The username already exists</string>
     <string name="error_does_not_exist">The username does not exist</string>
     <string name="error_wrong_password">The password is not correct</string>
+    <string name="home">Home</string>
+    <string name="challenges">Challenges</string>
+    <string name="add_post">AddPost</string>
+    <string name="profile">Profile</string>
+    <string name="log_out">Log Out</string>
+    <string name="theme">Theme</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>
