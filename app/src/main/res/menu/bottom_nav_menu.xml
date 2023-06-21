@@ -4,17 +4,17 @@
     <item
         android:id="@+id/postsFragment"
         android:icon="@drawable/baseline_home_24"
-        android:title="Home" />
+        android:title="@string/home" />
     <item
         android:id="@+id/challengesFragment"
         android:icon="@drawable/baseline_table_rows_24"
-        android:title="Challenges" />
+        android:title="@string/challenges" />
     <item
         android:id="@+id/addPostFragment"
         android:icon="@drawable/baseline_add_to_photos_24"
-        android:title="AddPost" />
+        android:title="@string/add_post" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/baseline_account_circle_24"
-        android:title="Profile" />
+        android:title="@string/profile" />
 </menu>

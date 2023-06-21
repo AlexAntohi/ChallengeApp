@@ -14,7 +14,7 @@
         android:layout_marginTop="200dp"
         android:layout_marginEnd="16dp"
         android:layout_weight='1'
-        android:background="@color/white"
+        android:background="@drawable/login_edit_text"
         android:hint="@string/usernameHint"
         android:inputType="text"
         android:padding="10dp"
@@ -32,7 +32,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_weight='1'
-        android:background="@color/white"
+        android:background="@drawable/login_edit_text"
         android:hint="@string/passwordHint"
         android:inputType="textPassword"
         android:padding="10dp"
