@@ -1,12 +1,15 @@
 package com.example.challengeapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.challengeapp.data.ChallengeRepository
 import com.example.challengeapp.data.UserRepository
 import com.example.challengeapp.data.models.Challenge
@@ -19,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private var editTextPassword: EditText? = null
     private val userRepository = UserRepository()
     private val challengeRepository = ChallengeRepository()
+    val THEME_PREF_KEY = "themePref"
+    lateinit var sharedPrefs: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,8 +40,18 @@ class MainActivity : AppCompatActivity() {
         loginButton?.setOnClickListener {
             login()
         }
-        //initializeChallenges()
+        sharedPrefs = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        val isDarkModeEnabled = sharedPrefs.getBoolean(THEME_PREF_KEY, false)
+        if(isDarkModeEnabled)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
+        //initializeChallenges()
+
     private fun login()
     {
         val username = editTextUsername?.text?.toString()?.trim() ?: return

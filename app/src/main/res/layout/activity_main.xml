@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="16dp"
+        android:textSize="25sp"
         android:layout_weight='1'
         android:background="@drawable/login_edit_text"
         android:hint="@string/usernameHint"
@@ -31,6 +32,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:textSize="25sp"
         android:layout_weight='1'
         android:background="@drawable/login_edit_text"
         android:hint="@string/passwordHint"
@@ -44,29 +46,34 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/button_state"
         android:padding="10dp"
         android:text="@string/loginButton"
         android:textColor="@drawable/text_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signInButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@drawable/button_state"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:padding="10dp"
         android:text="@string/signInButton"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_gravity="end"
         android:textColor="@drawable/text_selector"
-        android:background="@drawable/button_state"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
-        />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
