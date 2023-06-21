@@ -1,6 +1,8 @@
 package com.example.challengeapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -27,14 +29,24 @@ class AppActivity:AppCompatActivity() {
         inflater.inflate(R.menu.options_menu, menu)
         return true
     }
+    private lateinit var sharedPrefs: SharedPreferences
+    val THEME_PREF_KEY = "themePref"
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.light_mode -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                sharedPrefs = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+                val editor = sharedPrefs.edit()
+                editor.putBoolean(THEME_PREF_KEY, false)
+                editor.apply()
                 true
             }
             R.id.dark_mode -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                sharedPrefs = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+                val editor = sharedPrefs.edit()
+                editor.putBoolean(THEME_PREF_KEY, true)
+                editor.apply()
                 true
             }
             R.id.log_out -> {
