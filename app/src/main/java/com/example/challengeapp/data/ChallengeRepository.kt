@@ -34,5 +34,9 @@ class ChallengeRepository() {
 
     }
 
+    fun getChallengeById(challengeId: Int, listener:OnGetListener) {
+
+    }
+
 
 }

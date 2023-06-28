@@ -35,7 +35,7 @@ class ChallengesFragment : Fragment() {
     private fun setupViews(view:View) {
         setupRecyclerView(view)
 
-        getZooAnimals()
+        getChallenges()
     }
     private fun setupRecyclerView(view: View) {
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
@@ -45,7 +45,7 @@ class ChallengesFragment : Fragment() {
         recyclerView.adapter = challengeAdapter
     }
 
-    private fun getZooAnimals() {
+    private fun getChallenges() {
         val onGetListener = object : ChallengeRepository.OnGetListener {
             override fun onSuccess(items: List<Challenge>) {
                 challengesList.clear()

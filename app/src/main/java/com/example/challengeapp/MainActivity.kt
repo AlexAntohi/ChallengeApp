@@ -5,23 +5,25 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.challengeapp.data.ChallengeRepository
+import com.example.challengeapp.data.PostRepository
 import com.example.challengeapp.data.UserRepository
 import com.example.challengeapp.data.models.Challenge
+import com.example.challengeapp.data.models.Post
 import com.example.challengeapp.data.models.User
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private var signInButton: Button? = null
     private var loginButton: Button? = null
     private var editTextUsername: EditText? = null
     private var editTextPassword: EditText? = null
     private val userRepository = UserRepository()
     private val challengeRepository = ChallengeRepository()
+    private val postsRepository = PostRepository()
     val THEME_PREF_KEY = "themePref"
     lateinit var sharedPrefs: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         setupViews()
     }
     private fun setupViews() {
+
+        //initializeChallenges()
+        //initializePosts()
+
         signInButton = findViewById(R.id.signInButton)
         loginButton= findViewById(R.id.loginButton)
         editTextUsername = findViewById(R.id.usernameEditText)
@@ -50,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
-        //initializeChallenges()
+
 
     private fun login()
     {
@@ -115,7 +121,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        userRepository.getUsersById(username,onGetListener)
+        userRepository.getUsersByUsername(username,onGetListener)
     }
     private fun signIn() {
         val username = editTextUsername?.text?.toString()?.trim() ?: return
@@ -165,18 +171,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        userRepository.getUsersById(username,onGetListener)
+        userRepository.getUsersByUsername(username,onGetListener)
     }
 
     private fun initializeChallenges(){
 
         val challenge = Challenge (
-            0,
+            1,
             "Apa cu ulei",
         "Cel provocat va trebui sa bea un pahar de apa cu ulei ( se intelege ironia )."
                 )
         val challenge2 = Challenge (
-            0,
+            2,
             "Apa cu ulei la patrat",
             "Cel provocat va trebui sa bea un pahar de apa cu ulei ( se intelege ironia 2 )."
         )
@@ -191,5 +197,42 @@ class MainActivity : AppCompatActivity() {
         challengeRepository.insertChallenge(challenge,onSuccessListener)
         challengeRepository.insertChallenge(challenge2,onSuccessListener)
 
+    }
+
+    private fun initializePosts(){
+
+        val post = Post (
+            1,
+            1,
+            2,
+            20,
+            "https://www.youtube.com/watch?v=zWaymcVmJ-A"
+
+                )
+
+        val myPath = "android.resource://" + packageName + "/" + R.raw.videoclip
+
+        val post2 = Post (
+
+            9,
+            1,
+            1,
+            10,
+            //myPath
+        "https://www.youtube.com/watch?v=zWaymcVmJ-A"
+
+                )
+
+        val onSuccessListener = object : PostRepository.OnSuccessListener {
+            override fun onSuccess() {
+
+                Toast.makeText(
+                    this@MainActivity, "Postare adaugata cu succes",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        postsRepository.insertPost(post2, onSuccessListener)
     }
 }
