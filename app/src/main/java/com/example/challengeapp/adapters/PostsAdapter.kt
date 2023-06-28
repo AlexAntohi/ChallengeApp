@@ -16,8 +16,9 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.upstream.DefaultDataSource
+import com.google.android.exoplayer2.upstream.DefaultDataSource.Factory
 
 
 class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
@@ -64,14 +65,14 @@ class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<Posts
 
         private val username : TextView
         private val challengeName : TextView
-        private val  video : PlayerView //YoutubePlayerView
+        private val  video : StyledPlayerView //YoutubePlayerView
         private val myContext = myParent.context
 
 
         init {
             username = view.findViewById<TextView>(R.id.text_view_username)
             challengeName = view.findViewById<TextView>(R.id.text_view_challengeName)
-            video = view.findViewById<PlayerView>(R.id.video_view_videoclip)
+            video = view.findViewById<StyledPlayerView>(R.id.video_view_videoclip)
         }
 
         fun bind(post : Post){
@@ -109,7 +110,7 @@ class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<Posts
             val videoUri = Uri.parse(post.videoUrl)
             val mediaItem: MediaItem = MediaItem.fromUri(videoUri)
             val mediaSource: MediaSource =
-                ProgressiveMediaSource.Factory(DefaultDataSourceFactory(itemView.context))
+                ProgressiveMediaSource.Factory(Factory(itemView.context))
                     .createMediaSource(mediaItem)
             player!!.setMediaSource(mediaSource)
             player!!.prepare()
