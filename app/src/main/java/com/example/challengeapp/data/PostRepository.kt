@@ -3,6 +3,7 @@ package com.example.challengeapp.data
 import com.example.challengeapp.ApplicationController
 import com.example.challengeapp.data.models.Post
 import com.example.challengeapp.data.tasks.postTasks.DeletePostTask
+import com.example.challengeapp.data.tasks.postTasks.GetAllPostsByUserTask
 import com.example.challengeapp.data.tasks.postTasks.GetAllPostsTask
 import com.example.challengeapp.data.tasks.postTasks.InsertPostTask
 
@@ -38,5 +39,8 @@ class PostRepository () {
 
         GetAllPostsTask(userDatabase, listener).execute()
 
+    }
+    fun getAllPostsByUsername(username:String,listener: OnGetListener){
+        GetAllPostsByUserTask(userDatabase,listener).execute(username)
     }
 }
