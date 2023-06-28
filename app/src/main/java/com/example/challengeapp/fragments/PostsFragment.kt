@@ -72,11 +72,10 @@ public class PostsFragment: Fragment() {
         val onGetListener = object : PostRepository.OnGetListener {
             override fun onSuccess(items: List<Post>) {
                 postsList.clear()
-                items.forEach{challenge->
-                    postsList.add(challenge)
+                items.forEach{post->
+                    postsList.add(post)
                 }
                 postsAdapter?.notifyItemRangeChanged(0, postsList.size)
-
             }
         }
         postRepository.getAllPosts(onGetListener)
