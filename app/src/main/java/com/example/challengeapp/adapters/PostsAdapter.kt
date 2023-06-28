@@ -53,13 +53,12 @@ class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<Posts
         private val username : TextView
         private val challengeName : TextView
         private val  video : StyledPlayerView //YoutubePlayerView
-        private var player: ExoPlayer?
-
+        var player: ExoPlayer? = ExoPlayer.Builder(itemView.context).build()
         init {
             username = view.findViewById<TextView>(R.id.text_view_username)
             challengeName = view.findViewById<TextView>(R.id.text_view_challengeName)
             video = view.findViewById<StyledPlayerView>(R.id.video_view_videoclip)
-            player = ExoPlayer.Builder(itemView.context).build()
+
         }
 
         fun bind(post : Post){
@@ -91,18 +90,21 @@ class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<Posts
             }
             challengeRepository.getChallengeById(post.challengeId, onnGetListener)
 
-
-
+            player = ExoPlayer.Builder(itemView.context).build()
             video.player = player
             val videoUri = Uri.parse(post.videoUrl)
             val mediaItem: MediaItem = MediaItem.fromUri(videoUri)
             val mediaSource: MediaSource =
                 ProgressiveMediaSource.Factory(Factory(itemView.context))
                     .createMediaSource(mediaItem)
-            player!!.setMediaSource(mediaSource)
-            player!!.prepare()
-            player!!.playWhenReady = false
-            players.add(player!!)
+            player?.setMediaSource(mediaSource)
+            player?.prepare()
+            player?.playWhenReady = false
+            if(player!=null)
+            {
+                players.add(player!!)
+            }
+
         }
         fun releasePlayer() {
             if (player != null) {
