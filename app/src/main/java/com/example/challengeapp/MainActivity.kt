@@ -3,6 +3,7 @@ package com.example.challengeapp
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -17,6 +18,7 @@ import com.example.challengeapp.data.models.Post
 import com.example.challengeapp.data.models.User
 
 class MainActivity : AppCompatActivity(){
+
     private var signInButton: Button? = null
     private var loginButton: Button? = null
     private var editTextUsername: EditText? = null
@@ -177,12 +179,12 @@ class MainActivity : AppCompatActivity(){
     private fun initializeChallenges(){
 
         val challenge = Challenge (
-            1,
+            0,
             "Apa cu ulei",
         "Cel provocat va trebui sa bea un pahar de apa cu ulei ( se intelege ironia )."
                 )
         val challenge2 = Challenge (
-            2,
+            0,
             "Apa cu ulei la patrat",
             "Cel provocat va trebui sa bea un pahar de apa cu ulei ( se intelege ironia 2 )."
         )
@@ -202,7 +204,7 @@ class MainActivity : AppCompatActivity(){
     private fun initializePosts(){
 
         val post = Post (
-            1,
+            0,
             1,
             2,
             20,
@@ -210,16 +212,16 @@ class MainActivity : AppCompatActivity(){
 
                 )
 
-        val myPath = "android.resource://" + packageName + "/" + R.raw.videoclip
+        val myPath = "android.resource://" + "com.example.challengeapp" + "/" + R.raw.video
 
         val post2 = Post (
 
-            9,
+            0,
             1,
             1,
             10,
-            //myPath
-        "https://www.youtube.com/watch?v=zWaymcVmJ-A"
+            myPath
+        //"https://www.youtube.com/watch?v=zWaymcVmJ-A"
 
                 )
 
@@ -232,7 +234,7 @@ class MainActivity : AppCompatActivity(){
                 ).show()
             }
         }
-
+        //postsRepository.insertPost(post, onSuccessListener)
         postsRepository.insertPost(post2, onSuccessListener)
     }
 }
