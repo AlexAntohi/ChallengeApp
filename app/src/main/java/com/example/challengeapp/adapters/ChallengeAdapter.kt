@@ -25,7 +25,7 @@ class ChallengeAdapter (val challengeList: ArrayList<Challenge>): RecyclerView.A
     override fun onBindViewHolder(holder: ChallengeViewHolder, position: Int) {
         val challenge: Challenge = challengeList[position]
         holder.bind(challenge)
-        Log.e("ZooAnimalAdapter", "onBindViewHolder: $position")
+        Log.e("ChallengeAdapter", "onBindViewHolder: $position")
     }
 
     override fun getItemCount(): Int {
