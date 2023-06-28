@@ -12,5 +12,8 @@ class GetChallengeByNameTask(private val userDatabase: UserDatabase?, private va
         return let{name[0]?.let{it1 -> userDatabase?.challengeDao()?.getChallengeByName(it1)
         }}
     }
-
+    override fun onPostExecute(result: List<Challenge>) {
+        super.onPostExecute(result)
+        listener.onSuccess(result)
+    }
 }

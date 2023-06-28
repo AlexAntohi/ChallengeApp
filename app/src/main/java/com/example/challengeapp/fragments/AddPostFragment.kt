@@ -23,8 +23,6 @@ class AddPostFragment : Fragment() {
 
     private lateinit var mySelectedChallenge : String
     private lateinit var videoPath : String
-    private var myUserId by Delegates.notNull<Int>()
-    private lateinit var nameOfChallenge : String
     val SELECTED_Video_REQUEST_CODE = 1
     private var selectVideoButton : Button?= null
     private var savePostButton : Button?= null
@@ -108,63 +106,38 @@ class AddPostFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-
             val onSuccessListener = object : PostRepository.OnSuccessListener {
                 override fun onSuccess() {
                     Log.e("post", "adaugat cu succes")
-
                 }
             }
-
             val act = requireActivity()
             val username = act.intent.getStringExtra("username")
-
             val usernames: ArrayList<User> = ArrayList()
             val challengeNames: ArrayList<Challenge> = ArrayList()
 
             val onGetListener = object : UserRepository.OnGetListener {
-
                 override fun onSuccess(items: List<User>) {
                     items.forEach { user ->
                         usernames.add(user)
                     }
                     Log.e("onGetListener", "m-am blocat " + usernames[0].userId.toString() )
 
-                    val post = Post (
-
-                        0,
-                        usernames[0].userId,
-//                                challengeNames[0].challengeId,
-                        1,
-                        10,
-                        videoPath
-
-                    )
-
-                    postsRepository.insertPost(post, onSuccessListener)
-
                     val onnGetListener = object : ChallengeRepository.OnGetListener {
-
                         override fun onSuccess(items: List<Challenge>) {
                             items.forEach { challenge ->
                                 challengeNames.add(challenge)
                             }
                             Log.e("onnGetListener","m-am blocat")
                             val post = Post (
-
                                 0,
                                 usernames[0].userId,
-//                                challengeNames[0].challengeId,
-                                1,
+                                challengeNames[0].challengeId,
                                 10,
                                 videoPath
 
                             )
-
                             postsRepository.insertPost(post, onSuccessListener)
-
-
-
                         }
                     }
                     challengeRepository.getChallengeByName(mySelectedChallenge, onnGetListener)
@@ -174,9 +147,6 @@ class AddPostFragment : Fragment() {
                 userRepository.getUsersByUsername(username, onGetListener)
 
             }
-
-
-
         }
     }
 }
