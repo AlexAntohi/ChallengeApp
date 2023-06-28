@@ -17,4 +17,7 @@ interface ChallengeDao {
     @Query("SELECT * FROM challenge WHERE challengeId = :challengeId")
     fun getChallengeById(challengeId: Int): List<Challenge>?
 
+    @Query("SELECT * FROM challenge WHERE name = :name")
+    fun getChallengeByName(name: String): List<Challenge>?
+
 }
