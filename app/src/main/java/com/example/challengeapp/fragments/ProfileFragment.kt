@@ -12,7 +12,6 @@ import com.example.challengeapp.R
 import com.example.challengeapp.adapters.PostsAdapter
 import com.example.challengeapp.data.PostRepository
 import com.example.challengeapp.data.models.Post
-import org.w3c.dom.Text
 
 class ProfileFragment : Fragment() {
 
@@ -56,6 +55,34 @@ class ProfileFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         postsAdapter = PostsAdapter(postsList)
         recyclerView.adapter = postsAdapter
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    autoPlayVisiblePlayers(recyclerView)
+                } else {
+                    pauseAllPlayers(recyclerView)
+                }
+            }
+        })
+    }
+    private fun autoPlayVisiblePlayers(recyclerView: RecyclerView) {
+        val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+        val viewHolder = recyclerView.findViewHolderForAdapterPosition(firstVisibleItemPosition)
+        if (viewHolder is PostsAdapter.PostsViewHolder) {
+            viewHolder.startPlayer()
+
+        }
+    }
+    private fun pauseAllPlayers(recyclerView: RecyclerView) {
+        for (i in 0 until recyclerView.childCount) {
+            val viewHolder = recyclerView.getChildViewHolder(recyclerView.getChildAt(i))
+            if (viewHolder is PostsAdapter.PostsViewHolder) {
+                viewHolder.pausePlayer()
+            }
+        }
     }
     private fun getPosts(){
         val onGetListener = object : PostRepository.OnGetListener {
