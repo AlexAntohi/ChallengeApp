@@ -30,7 +30,7 @@ class AppActivity:AppCompatActivity() {
         return true
     }
     private lateinit var sharedPrefs: SharedPreferences
-    val THEME_PREF_KEY = "themePref"
+    private val THEME_PREF_KEY = "themePref"
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.light_mode -> {

@@ -15,26 +15,23 @@
         android:background="@drawable/challenge_gradient"
         >
         <TextView
-            android:id="@+id/animal"
+            android:id="@+id/title_challenge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Scortisoara"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"/>
         <TextView
-            android:id="@+id/continent"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/animal"
+            android:layout_below="@id/title_challenge"
             android:padding="10dp"
-            android:text="Cel provocat trebuie sa manance o lingurita de scortisoara"
             android:textColor="@color/black"
-            android:textSize="10sp"
+            android:textSize="11sp"
             android:textStyle="bold"
             android:gravity="center"/>
-            />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

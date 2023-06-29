@@ -3,7 +3,6 @@ package com.example.challengeapp.fragments
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,7 @@ class AddPostFragment : Fragment() {
 
         selectVideoButton?.setOnClickListener{
 
-            selectedVideoFromGallery()
+            selectVideoFromGallery()
 
         }
 
@@ -60,46 +59,42 @@ class AddPostFragment : Fragment() {
 
     }
 
-    private fun beginSetup(view : View){
-
-//    val myItems = listOf("Apa cu ulei", "Apa cu ulei la patrat")
-
-      val myItems: ArrayList<String> = ArrayList()
+    private fun beginSetup(view : View)
+    {
+        val myItems: ArrayList<String> = ArrayList()
 
         val onGetListener = object : ChallengeRepository.OnGetListener {
-
             override fun onSuccess(items: List<Challenge>) {
                 items.forEach { challenge ->
                     myItems.add(challenge.name)
                 }
             }
-
         }
 
         challengeRepository.getAllChallenges(onGetListener)
 
-    val autoCompleteTextView : AutoCompleteTextView = view.findViewById(R.id.autocomplete_textview)
+        val autoCompleteTextView : AutoCompleteTextView = view.findViewById(R.id.autocomplete_textview)
 
         val myAdapter = ArrayAdapter(this.requireContext(), R.layout.list_challenge, myItems)
 
-    autoCompleteTextView.setAdapter(myAdapter)
+        autoCompleteTextView.setAdapter(myAdapter)
 
-    autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener {
-            adapterView, view, i, l ->
+    autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener{
+            adapterView, v, i, l ->
         val selectedItem = adapterView.getItemAtPosition(i)
         mySelectedChallenge = selectedItem.toString()
 
         Toast.makeText(this.requireContext(), "Item: $selectedItem ", Toast.LENGTH_SHORT).show()
+       }
+    }
 
-    } }
-
-    private fun selectedVideoFromGallery(){
+    private fun selectVideoFromGallery(){
        val intent = Intent()
         intent.action = Intent.ACTION_PICK
         intent.type="video/*"
         videoLauncher.launch(intent)
     }
-    val videoLauncher=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private val videoLauncher=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == Activity.RESULT_OK)
         {
             if(it.data!=null){
@@ -128,11 +123,10 @@ class AddPostFragment : Fragment() {
         } else {
             val onSuccessListener = object : PostRepository.OnSuccessListener {
                 override fun onSuccess() {
-                    Log.e("post", "adaugat cu succes")
                 }
             }
-            val act = requireActivity()
-            val username = act.intent.getStringExtra("username")
+            val activity = requireActivity()
+            val username = activity.intent.getStringExtra("username")
             val usernames: ArrayList<User> = ArrayList()
             val challengeNames: ArrayList<Challenge> = ArrayList()
 
@@ -141,14 +135,11 @@ class AddPostFragment : Fragment() {
                     items.forEach { user ->
                         usernames.add(user)
                     }
-                    Log.e("onGetListener", "m-am blocat " + usernames[0].userId.toString() )
-
                     val onnGetListener = object : ChallengeRepository.OnGetListener {
                         override fun onSuccess(items: List<Challenge>) {
                             items.forEach { challenge ->
                                 challengeNames.add(challenge)
                             }
-                            Log.e("onnGetListener","m-am blocat")
                             val post = Post (
                                 0,
                                 usernames[0].userId,

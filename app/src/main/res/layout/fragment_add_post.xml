@@ -12,7 +12,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Select video"
+        android:background="@drawable/button_state"
+        android:text="@string/select_video"
         android:layout_margin="100dp"
         />
 
@@ -23,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:orientation="vertical"
-
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/button_add_video"
         app:layout_constraintEnd_toEndOf="@+id/button_add_video"
@@ -45,16 +45,12 @@
         android:id="@+id/button_savePost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:background="@drawable/button_state"
         app:layout_constraintTop_toBottomOf="@id/button_add_video"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-        android:text="Save post"
-
+        android:text="@string/save_post"
         android:layout_margin="20dp"
-
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

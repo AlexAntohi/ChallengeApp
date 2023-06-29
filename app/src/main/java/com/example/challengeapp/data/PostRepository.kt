@@ -23,19 +23,19 @@ class PostRepository () {
         userDatabase = ApplicationController.getUserDatabase()
     }
 
-    fun insertPost( newPost: Post, listener: PostRepository.OnSuccessListener) {
+    fun insertPost( newPost: Post, listener: OnSuccessListener) {
 
         InsertPostTask(userDatabase, listener).execute(newPost)
 
     }
 
-    fun deletePost( myPost: Post, listener: PostRepository.OnSuccessListener) {
+    fun deletePost( myPost: Post, listener: OnSuccessListener) {
 
         DeletePostTask(userDatabase, listener).execute(myPost)
 
     }
 
-    fun getAllPosts(listener: PostRepository.OnGetListener) {
+    fun getAllPosts(listener: OnGetListener) {
 
         GetAllPostsTask(userDatabase, listener).execute()
 

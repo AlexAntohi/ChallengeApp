@@ -20,17 +20,13 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource.Factory
 
 
-class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
+class PostsAdapter (private val postsList: ArrayList<Post>) : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
     private val players: MutableList<ExoPlayer> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder {
-
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.post, parent, false)
-        val postsViewHolder = PostsViewHolder(view)
-
-        return postsViewHolder
+        return PostsViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: PostsViewHolder, position: Int) {
         val post : Post = postsList[position]
         holder.bind(post)
@@ -52,17 +48,14 @@ class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<Posts
     {
         private val username : TextView
         private val challengeName : TextView
-        private val  video : StyledPlayerView //YoutubePlayerView
+        private val  video : StyledPlayerView
         var player: ExoPlayer? = ExoPlayer.Builder(itemView.context).build()
         init {
-            username = view.findViewById<TextView>(R.id.text_view_username)
-            challengeName = view.findViewById<TextView>(R.id.text_view_challengeName)
-            video = view.findViewById<StyledPlayerView>(R.id.video_view_videoclip)
-
+            username = view.findViewById(R.id.text_view_username)
+            challengeName = view.findViewById(R.id.text_view_challengeName)
+            video = view.findViewById(R.id.video_view_videoclip)
         }
-
         fun bind(post : Post){
-
             var myUser : User? = null
             val userRepository = UserRepository()
 
@@ -104,7 +97,6 @@ class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<Posts
             {
                 players.add(player!!)
             }
-
         }
         fun releasePlayer() {
             if (player != null) {
@@ -115,7 +107,6 @@ class PostsAdapter (val postsList: ArrayList<Post>) : RecyclerView.Adapter<Posts
         fun startPlayer() {
             player?.playWhenReady = true
         }
-
         fun pausePlayer() {
             player?.playWhenReady = false
         }

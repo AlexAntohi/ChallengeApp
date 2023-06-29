@@ -16,4 +16,8 @@
     <string name="theme">Theme</string>
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="select_video">Select video</string>
+    <string name="save_post">Save post</string>
+    <string name="username">username</string>
+    <string name="challengename">challengeName</string>
 </resources>

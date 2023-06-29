@@ -11,5 +11,4 @@ data class Challenge
     @PrimaryKey(autoGenerate = true) val challengeId : Int,
     @ColumnInfo val name: String,
     @ColumnInfo val description: String
-            ){
-}
+            )

@@ -18,6 +18,7 @@ interface PostDao {
 
     @Query("SELECT * FROM post INNER JOIN user ON post.userId = user.userId WHERE user.username = :username")
     fun getPostsByUsername(username: String?): List<Post>?
+
     @Delete
     fun delete(post: Post?)
 
