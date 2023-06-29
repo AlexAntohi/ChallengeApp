@@ -62,11 +62,25 @@ class AddPostFragment : Fragment() {
 
     private fun beginSetup(view : View){
 
-    val myItems = listOf("Apa cu ulei", "Apa cu ulei la patrat")
+//    val myItems = listOf("Apa cu ulei", "Apa cu ulei la patrat")
+
+      val myItems: ArrayList<String> = ArrayList()
+
+        val onGetListener = object : ChallengeRepository.OnGetListener {
+
+            override fun onSuccess(items: List<Challenge>) {
+                items.forEach { challenge ->
+                    myItems.add(challenge.name)
+                }
+            }
+
+        }
+
+        challengeRepository.getAllChallenges(onGetListener)
 
     val autoCompleteTextView : AutoCompleteTextView = view.findViewById(R.id.autocomplete_textview)
 
-    val myAdapter = ArrayAdapter(this.requireContext(), R.layout.list_challenge, myItems)
+        val myAdapter = ArrayAdapter(this.requireContext(), R.layout.list_challenge, myItems)
 
     autoCompleteTextView.setAdapter(myAdapter)
 
