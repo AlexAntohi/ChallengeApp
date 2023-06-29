@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="viewStart"
-            android:hint="username"
+            android:hint="@string/username"
             />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="viewEnd"
-            android:hint="challengeName"
+            android:hint="@string/challengename"
             />
 
         <com.google.android.exoplayer2.ui.StyledPlayerView

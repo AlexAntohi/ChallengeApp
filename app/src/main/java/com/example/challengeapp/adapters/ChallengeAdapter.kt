@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.challengeapp.R
 import com.example.challengeapp.data.models.Challenge
 
-class ChallengeAdapter (val challengeList: ArrayList<Challenge>): RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder>() {
+class ChallengeAdapter (private val challengeList: ArrayList<Challenge>): RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder
     {
@@ -37,8 +37,8 @@ class ChallengeAdapter (val challengeList: ArrayList<Challenge>): RecyclerView.A
         private val title: TextView
         private val description: TextView
         init{
-            title=view.findViewById<TextView>(R.id.animal)
-            description=view.findViewById<TextView>(R.id.continent)
+            title=view.findViewById(R.id.title_challenge)
+            description=view.findViewById(R.id.description)
         }
         fun bind(challenge: Challenge)
         {

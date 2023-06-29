@@ -18,7 +18,6 @@ import com.example.challengeapp.data.models.Post
 
 class ProfileFragment : Fragment() {
 
-
     var username: String? = null
     private val postRepository = PostRepository()
     private val postsList by lazy {
@@ -49,7 +48,6 @@ class ProfileFragment : Fragment() {
                 setupViews(view)
             },1500)
         }
-
     }
     override fun onPause() {
         super.onPause()

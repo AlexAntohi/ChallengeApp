@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +33,6 @@ class ChallengesFragment : Fragment() {
     }
     private fun setupViews(view:View) {
         setupRecyclerView(view)
-
         getChallenges()
     }
     private fun setupRecyclerView(view: View) {
@@ -53,7 +51,6 @@ class ChallengesFragment : Fragment() {
                     challengesList.add(challenge)
                 }
                 challengeAdapter?.notifyItemRangeChanged(0, challengesList.size)
-
             }
         }
         challengeRepository.getAllChallenges(onGetListener)

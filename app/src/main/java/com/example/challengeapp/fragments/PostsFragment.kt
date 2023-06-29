@@ -60,10 +60,8 @@ class PostsFragment: Fragment() {
     }
 
     private fun setupViews(view : View){
-
         setupRecyclerView(view)
         getPosts()
-
     }
 
     private fun setupRecyclerView(view : View){
@@ -76,7 +74,6 @@ class PostsFragment: Fragment() {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     autoPlayVisiblePlayers(recyclerView)
                 } else {
@@ -91,7 +88,6 @@ class PostsFragment: Fragment() {
         val viewHolder = recyclerView.findViewHolderForAdapterPosition(firstVisibleItemPosition)
         if (viewHolder is PostsAdapter.PostsViewHolder) {
             viewHolder.startPlayer()
-
         }
     }
     private fun pauseAllPlayers(recyclerView: RecyclerView) {

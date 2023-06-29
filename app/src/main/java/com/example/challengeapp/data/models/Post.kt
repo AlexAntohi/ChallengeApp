@@ -11,5 +11,4 @@ data class Post (
     @ColumnInfo val challengeId: Int,
     @ColumnInfo val numberOfLikes: Int,
     @ColumnInfo val videoUrl: String
-        ) {
-}
+        )

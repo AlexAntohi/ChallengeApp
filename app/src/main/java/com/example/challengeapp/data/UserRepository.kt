@@ -48,8 +48,4 @@ class UserRepository () {
         GetUserByIdTask(userDatabase,listener).execute(userId)
     }
 
-    fun getUsersById(userId: UserRepository.OnGetListener) {
-
-    }
-
 }
