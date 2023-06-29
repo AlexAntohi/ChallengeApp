@@ -1,16 +1,20 @@
 package com.example.challengeapp.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.challengeapp.R
 import com.example.challengeapp.adapters.PostsAdapter
 import com.example.challengeapp.data.PostRepository
 import com.example.challengeapp.data.models.Post
+
 
 class PostsFragment: Fragment() {
 
@@ -35,9 +39,21 @@ class PostsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViews(view)
+        configSwipe(view)
         super.onViewCreated(view, savedInstanceState)
-
         }
+
+    private fun configSwipe(view: View) {
+        val swipe = view.findViewById<SwipeRefreshLayout>(R.id.swipe)
+        swipe.setColorSchemeResources(R.color.teal_700)
+        swipe.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                swipe.isRefreshing=false
+                setupViews(view)
+            },1500)
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         postsAdapter?.releaseAllPlayers()
@@ -98,6 +114,5 @@ class PostsFragment: Fragment() {
             }
         }
         postRepository.getAllPosts(onGetListener)
-
     }
     }

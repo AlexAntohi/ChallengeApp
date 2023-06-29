@@ -1,6 +1,8 @@
 package com.example.challengeapp.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.challengeapp.R
 import com.example.challengeapp.adapters.PostsAdapter
 import com.example.challengeapp.data.PostRepository
@@ -35,6 +38,18 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews(view)
+        configSwipe(view)
+    }
+    private fun configSwipe(view: View) {
+        val swipe = view.findViewById<SwipeRefreshLayout>(R.id.swipe)
+        swipe.setColorSchemeResources(R.color.teal_700)
+        swipe.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                swipe.isRefreshing=false
+                setupViews(view)
+            },1500)
+        }
+
     }
     override fun onPause() {
         super.onPause()

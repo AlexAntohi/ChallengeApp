@@ -1,14 +1,14 @@
 package com.example.challengeapp.fragments
 
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.challengeapp.R
 import com.example.challengeapp.data.ChallengeRepository
@@ -17,19 +17,20 @@ import com.example.challengeapp.data.UserRepository
 import com.example.challengeapp.data.models.Challenge
 import com.example.challengeapp.data.models.Post
 import com.example.challengeapp.data.models.User
-import kotlin.properties.Delegates
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+
 
 class AddPostFragment : Fragment() {
 
     private lateinit var mySelectedChallenge : String
     private lateinit var videoPath : String
-    val SELECTED_Video_REQUEST_CODE = 1
     private var selectVideoButton : Button?= null
     private var savePostButton : Button?= null
     private val postsRepository = PostRepository()
     private val userRepository = UserRepository()
     private val challengeRepository = ChallengeRepository()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,10 +41,9 @@ class AddPostFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         selectVideoButton = view.findViewById(R.id.button_add_video)
         savePostButton = view.findViewById(R.id.button_savePost)
-
+        savePostButton!!.isEnabled=false
         beginSetup(view)
 
         selectVideoButton?.setOnClickListener{
@@ -80,21 +80,27 @@ class AddPostFragment : Fragment() {
     } }
 
     private fun selectedVideoFromGallery(){
-
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, SELECTED_Video_REQUEST_CODE)
-
+       val intent = Intent()
+        intent.action = Intent.ACTION_PICK
+        intent.type="video/*"
+        videoLauncher.launch(intent)
     }
+    val videoLauncher=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == Activity.RESULT_OK)
+        {
+            if(it.data!=null){
+                val ref = Firebase.storage.reference.child("Video/"+System.currentTimeMillis())
+                ref.putFile(it.data!!.data!!).addOnSuccessListener {
+                    ref.downloadUrl.addOnSuccessListener{
+                        Firebase.database.reference.child("Video").push().setValue(it.toString())
+                        Toast.makeText(this.requireContext(),"Uploaded video",Toast.LENGTH_SHORT).show()
+                        videoPath= it.toString()
+                        savePostButton!!.isEnabled=true
+                    }
+                }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == SELECTED_Video_REQUEST_CODE && resultCode == RESULT_OK) {
-            val videoUri = data?.data
-
-            videoPath = videoUri.toString()
+            }
         }
-
     }
 
     private fun checkIfPostCanBeCreated() {
@@ -135,7 +141,6 @@ class AddPostFragment : Fragment() {
                                 challengeNames[0].challengeId,
                                 10,
                                 videoPath
-
                             )
                             postsRepository.insertPost(post, onSuccessListener)
                         }
@@ -145,7 +150,6 @@ class AddPostFragment : Fragment() {
             }
             if (username != null) {
                 userRepository.getUsersByUsername(username, onGetListener)
-
             }
         }
     }
